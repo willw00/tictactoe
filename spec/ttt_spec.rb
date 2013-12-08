@@ -1,5 +1,5 @@
 require 'rspec'
-require_relative '../lib/tictactoeminimax.rb'
+require_relative '../lib/tictactoe.rb'
 
 # board = 
 #	0 | 1 | 2
@@ -104,12 +104,6 @@ describe Game do
 				game.computer_move
 				game.board.should == [['o',0,0], ['x','x','o'],[0,0,'o']]
 			end
-		end
-	end
-
-	describe "when current_player == 0" do 
-		before(:all) do 
-			game.current_player = 0
 		end
 	end
 

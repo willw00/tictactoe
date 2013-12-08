@@ -1,6 +1,7 @@
 class Game
   attr_accessor :move_tracker, :board, :current_player, :pos_weights
 
+
   def initialize()
   	@board = [[0,0,0],[0,0,0],[0,0,0]]
   	@move_tracker = [0,0,0,0,0,0,0,0]
@@ -89,12 +90,6 @@ class Game
     end
   end
 
-  def game_over_message
-    return "you win!" if @move_tracker.include?(3)
-    return "the computer wins!" if @move_tracker.include?(-3)
-    return "it's a draw!"
-  end
-
   def add(*arrs)
   	arrs.transpose.map{|pair| pair.inject(:+)}
   end
@@ -105,10 +100,11 @@ class Game
 end
 
 game = Game.new
+
 until game.finished
   (game.current_player == 0) ? game.player_move : game.computer_move
   game.swap_player
   game.draw_board
 end
-message = game.game_over_message
-puts "Game over, " + message
+game.draw_board
+puts "Game over"
