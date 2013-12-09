@@ -2,7 +2,7 @@ class Game
   attr_accessor :move_tracker, :board, :current_player, :pos_weights
 
   def initialize()
-  	@board = [[0,0,0],[0,0,0],[0,0,0]]
+  	@board = [['?','?','?'],['?','?','?'],['?','?','?']]
   	@move_tracker = [0,0,0,0,0,0,0,0]
   	@current_player = choose_player
     @pos_weights = {0 => [1,1,0,0,1,0,0,0],
@@ -20,14 +20,14 @@ class Game
   	rand(2)
   end
 
-  def player_move
-    puts "Enter move: #{@pos_weights.keys}"
-    pos = gets.chomp.to_i
-    if @board.flatten[pos] == 0
+  def player_move(pos = nil)
+    #puts "Enter move: #{@pos_weights.keys}"
+    pos ||= gets.chomp.to_i
+    if @board.flatten[pos] == '?'
       @board[pos/3][pos%3] = 'x'
       update_trackers
     else
-      raise "Position taken, please choose again."
+      puts "Position taken, please choose again."
       player_move
     end
   end
@@ -104,11 +104,11 @@ class Game
   end
 end
 
-game = Game.new
-until game.finished
-  (game.current_player == 0) ? game.player_move : game.computer_move
-  game.swap_player
-  game.draw_board
-end
-message = game.game_over_message
-puts "Game over, " + message
+#game = Game.new
+#until game.finished
+#  (game.current_player == 0) ? game.player_move : game.computer_move
+#  game.swap_player
+#  game.draw_board
+#end
+#message = game.game_over_message
+#puts "Game over, " + message

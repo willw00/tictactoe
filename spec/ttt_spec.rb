@@ -22,7 +22,7 @@ describe Game do
 
 	context "when starting a new game" do
 		it "should have a blank board" do 
-			game.board.should == [[0,0,0],[0,0,0],[0,0,0]]
+			game.board.should == [['?','?','?'],['?','?','?'],['?','?','?']]
 		end
 		it "should have a blank move tracker" do							
 			game.move_tracker.should == [0,0,0,0,0,0,0,0]
@@ -41,7 +41,7 @@ describe Game do
 				game.computer_move
 			end
 			it "should make an 'O' at position a" do
-				game.board.should == [[0,0,0], [0,'o',0],[0,0,0]]
+				game.board.should == [['?','?','?'],['?','o','?'],['?','?','?']]
 			end
 			it "should update move_tracker" do 
 				game.move_tracker.should == pw[4].map{|n| -1*n}
@@ -61,22 +61,22 @@ describe Game do
                     				8 => [1,0,0,1,0,0,1,0]}
 			end
 			it "should attempt to finish 3-in-a-row" do
-				game.board = [['o',0,'x'], [0,'o','x'],[0,0,0]]
+				game.board = [['o','?','x'], ['?','o','x'],['?','?','?']]
 				game.update_trackers
 				game.computer_move
-				game.board.should == [['o',0,'x'], [0,'o','x'],[0,0,'o']]
+				game.board.should == [['o','?','x'], ['?','o','x'],['?','?','o']]
 			end
 			it "should attempt to finish 3-in-a-row" do
-				game.board = [[0,'x',0], ['x','x',0],[0,'o','o']]
+				game.board = [['?','x','?'], ['x','x','?'],['?','o','o']]
 				game.update_trackers
 				game.computer_move
-				game.board.should == [[0,'x',0], ['x','x',0],['o','o','o']]
+				game.board.should == [['?','x','?'], ['x','x','?'],['o','o','o']]
 			end
 			it "should attempt to finish 3-in-a-row" do
-				game.board = [['x','o','x'], [0,'o',0],['o',0,'x']]
+				game.board = [['x','o','x'], ['?','o','?'],['o','?','x']]
 				game.update_trackers
 				game.computer_move
-				game.board.should == [['x','o','x'], [0,'o',0],['o','o','x']]
+				game.board.should == [['x','o','x'], ['?','o','?'],['o','o','x']]
 			end
 		end
 		context "and the player has 2-in-a-row" do
@@ -93,16 +93,16 @@ describe Game do
                     				8 => [1,0,0,1,0,0,1,0]}
 			end
 			it "should block the player's 3-in-a-row" do
-				game.board = [['x','o',0], [0,'x',0],[0,0,0]]
+				game.board = [['x','o','?'], ['?','x','?'],['?','?','?']]
 				game.update_trackers
 				game.computer_move
-				game.board.should == [['x','o',0], [0,'x',0],[0,0,'o']]
+				game.board.should == [['x','o','?'], ['?','x','?'],['?','?','o']]
 			end
 			it "should block the player's 3-in-a-row" do 
-				game.board = [['o',0,0], ['x','x',0],[0,0,'o']]
+				game.board = [['o','?','?'], ['x','x','?'],['?','?','o']]
 				game.update_trackers
 				game.computer_move
-				game.board.should == [['o',0,0], ['x','x','o'],[0,0,'o']]
+				game.board.should == [['o','?','?'], ['x','x','o'],['?','?','o']]
 			end
 		end
 	end
